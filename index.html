@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>주가 예측기</title>
+</head>
+<body>
+  <h2>주가 예측기</h2>
+  <form id="predict-form">
+    <input type="number" step="0.01" id="ma5" placeholder="MA5 입력" required />
+    <input type="number" step="1" id="volume" placeholder="거래량 입력" required />
+    <button type="submit">예측하기</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("predict-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const ma5 = parseFloat(document.getElementById("ma5").value);
+      const volume = parseFloat(document.getElementById("volume").value);
+
+      const res = await fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ma5: ma5, volume: volume })
+      });
+
+      const data = await res.json();
+      document.getElementById("result").innerText = `📈 예측 주가: $${data.predicted_price}`;
+    });
+  </script>
+</body>
+</html>
