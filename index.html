@@ -19,7 +19,7 @@
       const ma5 = parseFloat(document.getElementById("ma5").value);
       const volume = parseFloat(document.getElementById("volume").value);
 
-      const res = await fetch("http://127.0.0.1:5000/predict", {
+      const res = await fetch("https://stock-predictor-o32n.onrender.com/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ma5: ma5, volume: volume })
