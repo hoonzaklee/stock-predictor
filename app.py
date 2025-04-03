@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # ← 추가
+from flask_cors import CORS
 import joblib
 import numpy as np
 
 app = Flask(__name__)
-CORS(app)  # ← 이 줄 추가로 모든 요청 허용!
+CORS(app)
 
 model = joblib.load('stock_model.pkl')
 
